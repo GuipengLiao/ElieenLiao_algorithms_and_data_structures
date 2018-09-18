@@ -55,7 +55,26 @@ void invertTreeIter(TreeNode* root)
 // Prints post order traversal of tree, where level expands left to right.
 void postOrder(TreeNode* root, int indent = 0) 
 {
-
+	if (root != nullptr) 
+	{
+		if (root->right)
+		{
+			postOrder(root->right, indent + 4);
+		}
+		if (indent) {
+			std::cout << std::setw(indent) << ' ';
+		}
+		if (root->right)
+		{
+			std::cout << " /\n" << std::setw(indent) << ' ';
+		}
+		std::cout << root->data << "\n ";
+		if (root->left)
+		{
+			std::cout << std::setw(indent) << ' ' << " \\\n";
+			postOrder(root->left, indent + 4);
+		}
+	}
 }
 
 int main() 
@@ -67,6 +86,8 @@ int main()
 	root->left->right = new TreeNode(5);
 	root->right->left = new TreeNode(6);
 	root->right->right = new TreeNode(7);
+	root->left->left->left = new TreeNode(8);
+	root->left->left->right = new TreeNode(9);
 	std::cout << "Current Tree: \n";
 	postOrder(root);
 	std::cout << "\nInverting it recursively:\n";
@@ -76,5 +97,10 @@ int main()
 	invertTreeIter(root);
 	postOrder(root);
 	std::cout << std::endl;
+
+	while (true)
+	{
+
+	}
 	return 0;
 }
